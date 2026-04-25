@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dnyaneshwari Dryers &amp; Dry Cleaners</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@300;400;600&family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0d1b2a;--gold:#c9a84c;--gold-light:#e8c97a;--white:#f5f0e8;--sky:#7bafd4;
+  --bg:#f0f4f8;--surface:#fff;--navy2:#1b3a6b;
+  --cyan:#00c9a7;--cyan2:#00e5bf;--cyan-soft:rgba(0,201,167,0.12);
+  --text:#0b2545;--text2:#4a6080;--border:#d8e4f0;
+  --shadow:0 4px 24px rgba(11,37,69,.10);--radius:16px;--radius-sm:10px;
+}
+body{font-family:'Montserrat',sans-serif;overflow-x:hidden;background:var(--navy)}
+.page{display:none}.page.active{display:block}
+
+/* ── NAVBAR ── */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:998;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(13,27,42,.95);border-bottom:1px solid rgba(201,168,76,.18);backdrop-filter:blur(12px)}
+.navbar-brand{font-family:'Playfair Display',serif;font-size:clamp(.7rem,2vw,.9rem);font-weight:700;color:var(--gold);letter-spacing:.05em}
+.hamburger{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:5px;padding:6px;border-radius:6px;transition:background .2s}
+.hamburger:hover{background:rgba(201,168,76,.1)}
+.hamburger span{display:block;width:24px;height:2px;background:var(--gold);border-radius:2px;transition:transform .35s,opacity .35s,width .35s;transform-origin:center}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;width:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-menu{position:fixed;top:52px;left:0;right:0;z-index:997;background:rgba(10,20,35,.98);border-bottom:1px solid rgba(201,168,76,.2);backdrop-filter:blur(16px);display:flex;flex-direction:column;max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.22,1,.36,1)}
+.nav-menu.open{max-height:360px}
+.nav-item{border:none;background:none;color:rgba(245,240,232,.7);font-family:'Montserrat',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:16px 28px;text-align:left;cursor:pointer;border-bottom:1px solid rgba(201,168,76,.08);transition:background .2s,color .2s,padding-left .2s;display:flex;align-items:center;gap:12px}
+.nav-item:last-child{border-bottom:none}
+.nav-item:hover{background:rgba(201,168,76,.07);color:var(--gold);padding-left:36px}
+.nav-item.nav-active{color:var(--gold);background:rgba(201,168,76,.05)}
+.nav-icon{font-size:1rem;width:20px;text-align:center}
+#home,#about,#pricing{scroll-margin-top:58px}
+.lang-bar{position:fixed;top:10px;right:62px;z-index:999;display:flex;background:rgba(13,27,42,.88);border:1px solid rgba(201,168,76,.35);border-radius:50px;padding:4px;backdrop-filter:blur(8px);gap:2px}
+.lang-btn{border:none;background:transparent;color:rgba(245,240,232,.55);font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.06em;padding:6px 14px;border-radius:50px;cursor:pointer;transition:background .25s,color .25s}
+.lang-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy)}
+.lang-btn:hover:not(.active){color:var(--white)}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(160deg,#0d1b2a 0%,#142338 40%,#1a3a5c 100%)}
+.hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.012) 2px,rgba(255,255,255,.012) 4px),repeating-linear-gradient(90deg,transparent,transparent 6px,rgba(255,255,255,.008) 6px,rgba(255,255,255,.008) 7px);pointer-events:none}
+.steam-wrap{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bubble{position:absolute;bottom:-60px;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(200,220,232,.18),rgba(123,175,212,.05));border:1px solid rgba(200,220,232,.12);animation:rise linear infinite}
+.bubble:nth-child(1){width:28px;height:28px;left:8%;animation-duration:9s;animation-delay:0s}
+.bubble:nth-child(2){width:18px;height:18px;left:20%;animation-duration:12s;animation-delay:2s}
+.bubble:nth-child(3){width:40px;height:40px;left:35%;animation-duration:10s;animation-delay:1s}
+.bubble:nth-child(4){width:22px;height:22px;left:55%;animation-duration:14s;animation-delay:3s}
+.bubble:nth-child(5){width:32px;height:32px;left:70%;animation-duration:11s;animation-delay:.5s}
+.bubble:nth-child(6){width:16px;height:16px;left:85%;animation-duration:8s;animation-delay:4s}
+.bubble:nth-child(7){width:50px;height:50px;left:45%;animation-duration:13s;animation-delay:6s}
+.bubble:nth-child(8){width:24px;height:24px;left:60%;animation-duration:10s;animation-delay:7s}
+@keyframes rise{0%{transform:translateY(0) scale(1) translateX(0);opacity:0}10%{opacity:1}50%{transform:translateY(-45vh) scale(1.1) translateX(20px)}90%{opacity:.6}100%{transform:translateY(-105vh) scale(.8) translateX(-15px);opacity:0}}
+.glow-disc{position:absolute;width:min(520px,90vw);height:min(520px,90vw);border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.title-card{position:relative;z-index:10;text-align:center;padding:clamp(2rem,6vw,4rem) clamp(1.5rem,5vw,3.5rem);animation:fadeUp 1.2s cubic-bezier(.22,1,.36,1) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.divider-top{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:clamp(1rem,3vw,1.8rem)}
+.divider-top .line{height:1px;width:clamp(40px,8vw,80px);background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.divider-top .icon{font-size:clamp(1rem,3vw,1.4rem);filter:drop-shadow(0 0 6px rgba(201,168,76,.6))}
+.row-top{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,7.5vw,5.5rem);letter-spacing:clamp(.05em,1vw,.18em);color:var(--white);text-transform:uppercase;line-height:1;text-shadow:0 2px 30px rgba(201,168,76,.25)}
+.amp-row{display:flex;align-items:center;justify-content:center;gap:clamp(10px,2.5vw,24px);margin:clamp(.6rem,2vw,1.2rem) 0}
+.amp-line{flex:1;max-width:clamp(60px,12vw,140px);height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.5))}
+.amp-line.right{background:linear-gradient(270deg,transparent,rgba(201,168,76,.5))}
+.amp-badge{background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold));color:var(--navy);font-family:'Playfair Display',serif;font-size:clamp(1.2rem,3.5vw,2.2rem);font-weight:900;width:clamp(42px,8vw,64px);height:clamp(42px,8vw,64px);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(201,168,76,.4),0 4px 16px rgba(0,0,0,.4);animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 20px rgba(201,168,76,.4),0 4px 16px rgba(0,0,0,.4)}50%{box-shadow:0 0 32px rgba(201,168,76,.7),0 4px 24px rgba(0,0,0,.5)}}
+.row-dryers{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.5rem,5.5vw,4rem);letter-spacing:clamp(.12em,1.5vw,.3em);color:var(--sky);text-transform:uppercase;line-height:1}
+.row-drycleaners{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.4rem,5vw,3.6rem);letter-spacing:clamp(.08em,1.2vw,.22em);color:var(--gold-light);text-transform:uppercase;line-height:1.1;margin-top:clamp(4px,1vw,10px)}
+.divider-bottom{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:clamp(1rem,3vw,1.8rem)}
+.divider-bottom .line{height:1px;width:clamp(40px,8vw,80px);background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.divider-bottom .dots{display:flex;gap:6px}
+.divider-bottom .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.7}
+.divider-bottom .dot:nth-child(2){opacity:1;width:7px;height:7px}
+.tagline{margin-top:clamp(1rem,3vw,1.6rem);font-family:'Montserrat',sans-serif;font-weight:300;font-size:clamp(.65rem,1.8vw,.9rem);letter-spacing:clamp(.2em,1.5vw,.45em);color:rgba(200,220,232,.55);text-transform:uppercase}
+.hanger-row{margin-top:clamp(1.8rem,4vw,2.8rem);display:flex;gap:clamp(12px,3vw,24px);justify-content:center}
+.hanger-icon{font-size:clamp(1.2rem,3.5vw,2rem);opacity:.5;transition:opacity .3s,transform .3s;cursor:default}
+.hanger-icon:hover{opacity:1;transform:scale(1.2) rotate(-8deg)}
+.hero-order-btn{margin-top:clamp(1.5rem,4vw,2.5rem);display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--navy);font-family:'DM Sans',sans-serif;font-size:clamp(.82rem,2vw,1rem);font-weight:700;padding:14px 32px;border:none;border-radius:50px;cursor:pointer;box-shadow:0 6px 24px rgba(0,201,167,.35);transition:transform .2s,box-shadow .2s}
+.hero-order-btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,201,167,.5)}
+
+/* ── ABOUT ── */
+.about{background:#f5f0e8;padding:clamp(3rem,8vw,5.5rem) clamp(1.2rem,5vw,2rem)}
+.about-inner{max-width:860px;margin:0 auto}
+.section-label{text-align:center;font-family:'Montserrat',sans-serif;font-weight:600;font-size:clamp(.6rem,1.5vw,.75rem);letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.about-title{text-align:center;font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:700;color:var(--navy);margin-bottom:1rem}
+.about-rule{width:50px;height:2px;background:var(--gold);margin:0 auto 2rem;border-radius:2px}
+.about-text{font-family:'Montserrat',sans-serif;font-size:clamp(.88rem,2vw,1rem);font-weight:400;color:#3a3a3a;line-height:1.85;text-align:center;max-width:680px;margin:0 auto 2.5rem}
+.about-cards{display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:center;margin-top:2rem}
+.about-card{background:#fff;border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:1.4rem 1.6rem;flex:1 1 220px;max-width:280px;display:flex;gap:.9rem;align-items:flex-start;box-shadow:0 2px 12px rgba(13,27,42,.06);transition:box-shadow .3s}
+.about-card:hover{box-shadow:0 6px 24px rgba(13,27,42,.12)}
+.about-card--link{text-decoration:none;cursor:pointer}
+.about-card--link:hover{border-color:rgba(201,168,76,.6);box-shadow:0 6px 24px rgba(201,168,76,.18)}
+.card-maps-hint{margin-top:.6rem;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;color:var(--gold)}
+.card-icon{font-size:1.5rem;flex-shrink:0;margin-top:2px}
+.card-title{font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem}
+.card-text{font-family:'Montserrat',sans-serif;font-size:clamp(.8rem,1.8vw,.88rem);font-weight:400;color:#2a2a2a;line-height:1.6}
+
+/* ── PRICING ── */
+.pricing{background:var(--navy);padding:clamp(3rem,8vw,5.5rem) clamp(1.2rem,5vw,2rem)}
+.pricing-inner{max-width:860px;margin:0 auto}
+.pricing-title{text-align:center;font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:700;color:var(--white);margin-bottom:1rem}
+.pricing-grid{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;margin-top:2rem}
+.price-card{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.25);border-radius:14px;padding:1.8rem 1.6rem;flex:1 1 300px;max-width:380px;backdrop-filter:blur(4px)}
+.price-card-header{display:flex;align-items:center;gap:.7rem;margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:1px solid rgba(201,168,76,.2)}
+.price-card-icon{font-size:1.6rem}
+.price-card-title{font-family:'Playfair Display',serif;font-size:clamp(1rem,2.5vw,1.3rem);font-weight:700;color:var(--gold-light)}
+.price-table{display:flex;flex-direction:column;gap:.75rem}
+.price-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem .7rem;border-radius:7px;transition:background .2s;gap:8px}
+.price-row:hover{background:rgba(201,168,76,.07)}
+.price-item{font-family:'Montserrat',sans-serif;font-size:clamp(.75rem,1.8vw,.88rem);font-weight:400;color:rgba(245,240,232,.85);flex:1}
+.price-amt{font-family:'Montserrat',sans-serif;font-size:clamp(.78rem,1.8vw,.92rem);font-weight:700;color:var(--gold);white-space:nowrap;text-align:right}
+.per{font-weight:300;font-size:.75rem;color:rgba(201,168,76,.65)}
+.price-note{margin:2.5rem auto 0;text-align:center;font-family:'Montserrat',sans-serif;font-size:clamp(.78rem,1.8vw,.92rem);font-weight:600;color:#fff;line-height:1.8;max-width:580px;background:linear-gradient(135deg,rgba(180,30,30,.25),rgba(201,168,76,.15));border:1px solid rgba(220,60,60,.5);border-radius:12px;padding:1rem 1.4rem;position:relative;animation:noteGlow 2.5s ease-in-out infinite}
+@keyframes noteGlow{0%,100%{box-shadow:0 0 14px rgba(220,60,60,.4),0 0 30px rgba(220,60,60,.15)}50%{box-shadow:0 0 28px rgba(220,60,60,.7),0 0 55px rgba(220,60,60,.3)}}
+.pricing .section-label{color:var(--gold)}
+.order-banner{background:linear-gradient(135deg,#0b2545,#1b3a6b);padding:clamp(2.5rem,6vw,4rem) clamp(1.2rem,5vw,2rem);text-align:center}
+.order-banner h2{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,4vw,2.2rem);color:#fff;margin-bottom:.8rem}
+.order-banner p{color:rgba(255,255,255,.6);font-size:clamp(.82rem,2vw,.95rem);margin-bottom:1.8rem;max-width:500px;margin-left:auto;margin-right:auto}
+.big-order-btn{display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--navy);font-family:'DM Sans',sans-serif;font-size:clamp(.9rem,2.5vw,1.05rem);font-weight:700;padding:16px 36px;border:none;border-radius:50px;cursor:pointer;box-shadow:0 8px 28px rgba(0,201,167,.4);transition:transform .2s,box-shadow .2s}
+.big-order-btn:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,201,167,.5)}
+
+/* ── BOOKING PAGE ── */
+#page-booking{background:var(--bg);font-family:'DM Sans',sans-serif;min-height:100vh;padding-bottom:120px}
+.booking-header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);padding:60px 20px 24px;text-align:center;position:relative;overflow:hidden}
+.booking-header::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(0,201,167,.08);pointer-events:none}
+.back-btn{position:absolute;top:16px;left:16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:600;padding:8px 16px;border-radius:50px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .2s}
+.back-btn:hover{background:rgba(255,255,255,.18)}
+
+/* Booking language bar */
+.book-lang-bar{position:absolute;top:16px;right:16px;display:flex;background:rgba(13,27,42,.7);border:1px solid rgba(201,168,76,.35);border-radius:50px;padding:3px;gap:2px;backdrop-filter:blur(8px)}
+.book-lang-btn{border:none;background:transparent;color:rgba(255,255,255,.55);font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.06em;padding:5px 12px;border-radius:50px;cursor:pointer;transition:background .25s,color .25s}
+.book-lang-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy)}
+
+.booking-badge{display:inline-block;background:var(--cyan-soft);border:1px solid rgba(0,201,167,.3);color:var(--cyan2);font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:5px 14px;border-radius:50px;margin-bottom:10px}
+.booking-header h1{font-family:'DM Serif Display',serif;font-size:clamp(1.3rem,5vw,1.9rem);color:#fff;font-weight:400}
+.booking-header p{color:rgba(255,255,255,.6);font-size:.82rem;margin-top:6px;font-weight:300}
+.book-tabs{display:flex;background:#fff;border-radius:50px;padding:4px;gap:4px;box-shadow:var(--shadow);margin:20px auto 0;max-width:400px}
+.book-tab{flex:1;border:none;background:none;padding:9px 0;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.05em;color:var(--text2);cursor:pointer;transition:all .25s}
+.book-tab.active{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;box-shadow:0 4px 12px rgba(11,37,69,.25)}
+.book-wrap{max-width:720px;margin:0 auto;padding:0 16px}
+.book-section-title{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--navy);margin:28px 0 14px;display:flex;align-items:center;gap:8px}
+.service-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.filter-btn{border:1.5px solid var(--border);background:var(--surface);color:var(--text2);font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:600;padding:6px 14px;border-radius:50px;cursor:pointer;transition:all .2s}
+.filter-btn.active{border-color:var(--cyan);background:var(--cyan-soft);color:var(--navy)}
+
+/* item cards */
+.items-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:480px){.items-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:680px){.items-grid{grid-template-columns:repeat(4,1fr)}}
+.item-card{background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;transition:border-color .2s,box-shadow .2s}
+.item-card.has-qty{border-color:var(--cyan);box-shadow:0 2px 16px rgba(0,201,167,.2)}
+.item-icon{font-size:2rem;line-height:1}
+.item-name{font-size:.75rem;font-weight:700;color:var(--navy);text-align:center;line-height:1.3}
+.item-prices{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:2px}
+.price-tag{font-size:.62rem;font-weight:600;padding:2px 7px;border-radius:50px}
+.price-tag.iron{background:#fff3e0;color:#e65100}
+.price-tag.dry{background:#e0f7fa;color:#006064}
+.qty-badge{position:absolute;top:-8px;right:-8px;background:var(--cyan);color:var(--navy);font-size:.6rem;font-weight:800;min-width:20px;height:20px;border-radius:50px;display:none;align-items:center;justify-content:center;padding:0 5px}
+.item-card.has-qty .qty-badge{display:flex}
+.service-rows{width:100%;display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.service-row{display:flex;align-items:center;justify-content:space-between;background:#f8fafc;border-radius:8px;padding:5px 8px}
+.svc-label{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);min-width:30px}
+.qty-ctrl{display:flex;align-items:center;gap:6px}
+.qb{width:26px;height:26px;border-radius:50%;border:none;font-size:1.1rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;line-height:1}
+.qb.minus{background:#e8edf2;color:var(--text2)}
+.qb.minus:hover{background:#d0d8e4}
+.qb.plus{background:var(--navy);color:#fff}
+.qb.plus:hover{background:var(--cyan);color:var(--navy)}
+.qty-val{font-size:.85rem;font-weight:700;color:var(--navy);min-width:20px;text-align:center}
+
+/* bottom bar */
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--navy);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 -4px 24px rgba(11,37,69,.3)}
+.bar-info .bar-count{font-size:.68rem;color:rgba(255,255,255,.55);font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.bar-info .bar-total{font-size:1.1rem;font-weight:700;color:#fff}
+.bar-info .bar-total span{color:var(--cyan)}
+.proceed-btn{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--navy);font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:700;padding:11px 22px;border:none;border-radius:50px;cursor:pointer;transition:transform .15s,box-shadow .15s;white-space:nowrap}
+.proceed-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,201,167,.4)}
+.proceed-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+/* schedule */
+.bview{display:none}.bview.active{display:block}
+.order-summary-box{background:var(--navy);border-radius:var(--radius-sm);padding:16px;margin-bottom:16px}
+.order-summary-box h4{color:rgba(255,255,255,.55);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px;font-weight:600}
+.sum-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.sum-row:last-of-type{border:none}
+.sum-name{color:rgba(255,255,255,.75);font-size:.8rem}
+.sum-price{color:var(--cyan);font-size:.82rem;font-weight:600}
+.sum-total{display:flex;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(255,255,255,.15);margin-top:6px}
+.sum-total .sum-name{color:#fff;font-weight:700;font-size:.9rem}
+.sum-total .sum-price{color:var(--cyan2);font-weight:700;font-size:1rem}
+.form-card{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.form-row-2{grid-template-columns:1fr}}
+.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.fg label{font-size:.7rem;font-weight:600;color:var(--text2);letter-spacing:.08em;text-transform:uppercase}
+.fg input,.fg select,.fg textarea{background:#f8fafc;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:11px 14px;font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--text);outline:none;transition:border-color .2s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--cyan);background:#fff}
+.fg textarea{resize:vertical;min-height:80px}
+.loc-btn{display:flex;align-items:center;gap:8px;background:var(--cyan-soft);border:1.5px solid rgba(0,201,167,.3);color:var(--navy);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;padding:9px 16px;border-radius:var(--radius-sm);cursor:pointer;width:100%;justify-content:center;margin-top:6px;transition:background .2s}
+.loc-btn:hover{background:rgba(0,201,167,.2)}
+.schedule-btn{width:100%;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--navy);font-family:'DM Sans',sans-serif;font-size:.92rem;font-weight:700;padding:15px;border:none;border-radius:var(--radius-sm);cursor:pointer;transition:all .2s}
+.schedule-btn:hover{box-shadow:0 8px 24px rgba(0,201,167,.35);transform:translateY(-1px)}
+.disclaimer{text-align:center;font-size:.7rem;color:var(--text2);margin-top:10px;line-height:1.5}
+.empty-cart{text-align:center;padding:30px 20px;color:var(--text2)}
+.empty-cart .ec-icon{font-size:2.2rem;margin-bottom:8px}
+.empty-cart p{font-size:.83rem}
+
+/* ── HISTORY ── */
+.history-wrap{padding-bottom:20px}
+.history-empty{text-align:center;padding:40px 20px;color:var(--text2)}
+.history-empty .he-icon{font-size:2.5rem;margin-bottom:10px}
+.history-empty p{font-size:.85rem}
+.history-card{background:#fff;border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow);border-left:4px solid var(--cyan);position:relative}
+.hc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;flex-wrap:wrap;gap:6px}
+.hc-order-id{font-size:.7rem;font-weight:700;letter-spacing:.1em;color:var(--cyan);background:var(--cyan-soft);padding:3px 10px;border-radius:50px}
+.hc-date{font-size:.7rem;color:var(--text2)}
+.hc-customer{font-size:.82rem;font-weight:600;color:var(--navy);margin-bottom:6px}
+.hc-items{font-size:.76rem;color:var(--text2);line-height:1.7;margin-bottom:8px}
+.hc-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:10px;margin-top:6px;flex-wrap:wrap;gap:8px}
+.hc-total{font-size:.9rem;font-weight:700;color:var(--navy)}
+.hc-total span{color:var(--cyan)}
+.hc-actions{display:flex;gap:8px}
+.hc-view-btn,.hc-del-btn{border:none;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:600;padding:6px 14px;border-radius:50px;cursor:pointer;transition:all .2s}
+.hc-view-btn{background:var(--navy);color:#fff}
+.hc-view-btn:hover{background:var(--cyan);color:var(--navy)}
+.hc-del-btn{background:#fff0f0;color:#c0392b;border:1px solid #f5c6cb}
+.hc-del-btn:hover{background:#fde8e8}
+.history-clear-btn{width:100%;background:#fff0f0;border:1px solid #f5c6cb;color:#c0392b;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:600;padding:10px;border-radius:var(--radius-sm);cursor:pointer;margin-top:4px}
+
+/* ── TICKET MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(11,37,69,.75);z-index:500;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(6px)}
+.modal-overlay.show{opacity:1;pointer-events:all}
+.ticket{background:#fff;border-radius:20px;width:100%;max-width:420px;overflow:hidden;box-shadow:0 24px 80px rgba(11,37,69,.35);transform:scale(.9);transition:transform .3s;max-height:90vh;overflow-y:auto}
+.modal-overlay.show .ticket{transform:scale(1)}
+.ticket-hdr{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:22px 22px 18px;text-align:center}
+.ticket-logo{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--cyan);letter-spacing:.05em;margin-bottom:3px}
+.ticket-sub{font-size:.62rem;color:rgba(255,255,255,.45);letter-spacing:.2em;text-transform:uppercase}
+.t-order-id{background:rgba(0,201,167,.15);border:1px solid rgba(0,201,167,.3);color:var(--cyan2);font-size:.75rem;font-weight:700;padding:5px 16px;border-radius:50px;display:inline-block;margin-top:10px;letter-spacing:.1em}
+.ticket-body{padding:18px 20px}
+.t-sec-label{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text2);margin-bottom:7px;margin-top:12px}
+.t-item-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--border);font-size:.8rem}
+.t-item-row:last-child{border:none}
+.t-total-row{display:flex;justify-content:space-between;align-items:center;background:var(--cyan-soft);border-radius:var(--radius-sm);padding:11px 13px;margin-top:10px}
+.t-total-row .tt-lbl{font-size:.78rem;font-weight:600;color:var(--navy)}
+.t-total-row .tt-amt{font-size:1.1rem;font-weight:700;color:var(--navy)}
+.ticket-meta{font-size:.74rem;color:var(--text2);line-height:1.8}
+.ticket-meta span{font-weight:600;color:var(--text)}
+.ticket-disclaimer{font-size:.63rem;color:var(--text2);text-align:center;padding:10px 16px;background:#f8fafc;border-top:1px solid var(--border);line-height:1.5}
+.ticket-actions{display:flex;gap:8px;padding:12px 16px;background:#f8fafc;border-top:1px solid var(--border);flex-wrap:wrap}
+.t-btn{flex:1;font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;padding:10px 8px;border-radius:var(--radius-sm);cursor:pointer;border:none;min-width:70px;text-align:center}
+.t-btn-close{background:var(--bg);border:1.5px solid var(--border);color:var(--text2)}
+.t-btn-dl{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--navy);font-weight:700}
+.t-btn-new{background:var(--navy);color:#fff}
+</style>
+</head>
+<body>
+
+<!-- ════════════ MAIN PAGE ════════════ -->
+<div class="page active" id="page-main">
+  <nav class="navbar">
+    <div class="navbar-brand">D. Dryers &amp; Dry Cleaners</div>
+    <button class="hamburger" id="hamburger" onclick="window.toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-menu" id="nav-menu">
+    <button class="nav-item nav-active" id="nav-home" onclick="window.navTo('home')"><span class="nav-icon">🏠</span><span id="nav-home-label">Home</span></button>
+    <button class="nav-item" id="nav-about" onclick="window.navTo('about')"><span class="nav-icon">ℹ️</span><span id="nav-about-label">About</span></button>
+    <button class="nav-item" id="nav-pricing" onclick="window.navTo('pricing')"><span class="nav-icon">💰</span><span id="nav-pricing-label">Pricing</span></button>
+    <button class="nav-item" onclick="window.openBooking()"><span class="nav-icon">🛒</span><span id="nav-order-label">Place Order</span></button>
+  </div>
+  <div class="lang-bar">
+    <button class="lang-btn active" id="btn-en" onclick="window.setLang('en')">EN</button>
+    <button class="lang-btn" id="btn-mr" onclick="window.setLang('mr')">मराठी</button>
+  </div>
+
+  <section class="hero" id="home">
+    <div class="steam-wrap">
+      <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+      <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+      <div class="bubble"></div><div class="bubble"></div>
+    </div>
+    <div class="glow-disc"></div>
+    <div class="title-card">
+      <div class="divider-top"><div class="line"></div><div class="icon">✦</div><div class="line"></div></div>
+      <div class="row-top" id="hero-name">Dnyaneshwari</div>
+      <div class="amp-row"><div class="amp-line"></div><div class="amp-badge">&amp;</div><div class="amp-line right"></div></div>
+      <div><div class="row-dryers" id="hero-dryers">Dryers</div><div class="row-drycleaners" id="hero-drycleaners">Dry Cleaners</div></div>
+      <div class="divider-bottom"><div class="line"></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="line"></div></div>
+      <div class="tagline" id="tagline">Fresh · Clean · Delivered with Care</div>
+      <div class="hanger-row"><span class="hanger-icon">👔</span><span class="hanger-icon">👗</span><span class="hanger-icon">🧥</span><span class="hanger-icon">👔</span></div>
+      <div style="text-align:center;margin-top:0">
+        <button class="hero-order-btn" onclick="window.openBooking()">🛒 <span id="hero-order-label">Place Order</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-inner">
+      <p class="section-label" id="about-label">Who We Are</p>
+      <h2 class="about-title" id="about-title">About Us</h2>
+      <div class="about-rule"></div>
+      <p class="about-text" id="about-text">Welcome to Dnyaneshwari Dryers &amp; Dry Cleaners. We are a trusted local dry cleaning and laundry service based in Pune, dedicated to giving your clothes the care they deserve.</p>
+      <div class="about-cards">
+        <a href="https://maps.app.goo.gl/aHa8sHhja946Gh6P8" target="_blank" rel="noopener noreferrer" class="about-card about-card--link">
+          <div class="card-icon">📍</div>
+          <div class="card-body"><div class="card-title" id="loc-title">Our Location</div><div class="card-text" id="loc-text">Shop No. 1, Road,<br>Raghav Nagar,<br>Ambegaon Budruk,<br>Pune, Maharashtra — 411046</div><div class="card-maps-hint" id="maps-hint">Open in Google Maps →</div></div>
+        </a>
+        <div class="about-card"><div class="card-icon">✅</div><div class="card-body"><div class="card-title" id="why-title">Why Choose Us</div><div class="card-text" id="why-text">Careful handling of all fabric types, reliable turnaround time, and honest service you can count on every visit.</div></div></div>
+        <div class="about-card"><div class="card-icon">🤝</div><div class="card-body"><div class="card-title" id="promise-title">Our Promise</div><div class="card-text" id="promise-text">We treat every garment as if it were our own — with care, respect, and a commitment to quality cleaning.</div></div></div>
+        <a href="https://mail.google.com/mail/?view=cm&to=dnyaneshwaridryers@gmail.com" target="_blank" rel="noopener noreferrer" class="about-card about-card--link">
+          <div class="card-icon">📧</div>
+          <div class="card-body"><div class="card-title" id="email-title">Email Us</div><div class="card-text"><span class="__cf_email__" data-cfemail="d3b7bdaab2bdb6a0bba4b2a1bab7a1aab6a1a093b4beb2babffdb0bcbe">[email&#160;protected]</span></div><div class="card-maps-hint" id="email-hint">Send us an email →</div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing" id="pricing">
+    <div class="pricing-inner">
+      <p class="section-label" id="price-label">Our Prices</p>
+      <h2 class="pricing-title" id="price-title">Price List</h2>
+      <div class="about-rule"></div>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-card-header"><span class="price-card-icon">🧺</span><h3 class="price-card-title" id="iron-heading">Ironing (Press)</h3></div>
+          <div class="price-table">
+            <div class="price-row"><span class="price-item" id="ir-shirt">Shirt</span><span class="price-amt">₹10 <span class="per" id="per1">/ piece</span></span></div>
+            <div class="price-row"><span class="price-item" id="ir-pant">Pant</span><span class="price-amt">₹10 <span class="per" id="per2">/ piece</span></span></div>
+            <div class="price-row"><span class="price-item" id="ir-saree">Saree</span><span class="price-amt">₹35 <span class="per" id="per3">/ piece</span></span></div>
+            <div class="price-row"><span class="price-item" id="ir-urgent">Urgent</span><span class="price-amt">₹15 <span class="per" id="per4">/ piece</span></span></div>
+            <div class="price-row"><span class="price-item" id="ir-starch">Starch (Special)</span><span class="price-amt">₹15 <span class="per" id="per5">/ piece</span></span></div>
+            <div class="price-row"><span class="price-item">Kurta</span><span class="price-amt">₹10 <span class="per">/ piece</span></span></div>
+            <div class="price-row"><span class="price-item">Suit</span><span class="price-amt">₹50 <span class="per">/ piece</span></span></div>
+            <div class="price-row"><span class="price-item">Jacket / Blazer</span><span class="price-amt">₹50 <span class="per">/ piece</span></span></div>
+          </div>
+        </div>
+        <div class="price-card">
+          <div class="price-card-header"><span class="price-card-icon">✨</span><h3 class="price-card-title" id="dry-heading">Dry Cleaning</h3></div>
+          <div class="price-table">
+            <div class="price-row"><span class="price-item" id="dc-shirt">Shirt</span><span class="price-amt">₹10 &amp; above</span></div>
+            <div class="price-row"><span class="price-item" id="dc-pant">Pant</span><span class="price-amt">₹10 &amp; above</span></div>
+            <div class="price-row"><span class="price-item" id="dc-white">White Clothes</span><span class="price-amt">₹40 &amp; above</span></div>
+            <div class="price-row"><span class="price-item" id="dc-saree">Saree</span><span class="price-amt" id="dc-saree-price">₹150 &amp; above</span></div>
+            <div class="price-row"><span class="price-item" id="dc-starch">Starch (Special)</span><span class="price-amt">₹50 &amp; above</span></div>
+            <div class="price-row"><span class="price-item">Kurta</span><span class="price-amt">₹10 &amp; above</span></div>
+            <div class="price-row"><span class="price-item">Suit</span><span class="price-amt">₹150 &amp; above</span></div>
+            <div class="price-row"><span class="price-item">Jacket / Blazer</span><span class="price-amt">₹150 &amp; above</span></div>
+            <div class="price-row"><span class="price-item">Blanket</span><span class="price-amt">₹150 &amp; above</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="price-note" id="price-note">📝 Note: We are not responsible for stains caused by turmeric (हळद) or colour (गुलाल) on clothes.</p>
+    </div>
+  </section>
+
+  <section class="order-banner">
+    <h2 id="banner-title">Ready to Place an Order?</h2>
+    <p id="banner-sub">Select your items, schedule a pickup time, and get a digital ticket — all in one place.</p>
+    <button class="big-order-btn" onclick="window.openBooking()">🛒 <span id="banner-btn-label">Place Order Now</span></button>
+  </section>
+</div>
+
+<!-- ════════════ BOOKING PAGE ════════════ -->
+<div class="page" id="page-booking">
+  <div class="booking-header">
+    <button class="back-btn" onclick="window.closeBooking()">← <span id="bk-back">Back</span></button>
+
+    <!-- Booking Language Toggle -->
+    <div class="book-lang-bar">
+      <button class="book-lang-btn active" id="blb-en" onclick="window.setBookLang('en')">EN</button>
+      <button class="book-lang-btn" id="blb-mr" onclick="window.setBookLang('mr')">मराठी</button>
+    </div>
+
+    <div class="booking-badge" id="bk-badge">✦ Pickup Service</div>
+    <h1 id="bk-title">Schedule a Pickup</h1>
+    <p id="bk-sub">Select items · Schedule · Get your ticket</p>
+    <div class="book-tabs">
+      <button class="book-tab active" id="btab-items" onclick="window.showBView('items')">🧺 <span id="tab-items-lbl">Items</span></button>
+      <button class="book-tab" id="btab-schedule" onclick="window.showBView('schedule')">📅 <span id="tab-sched-lbl">Schedule</span></button>
+      <button class="book-tab" id="btab-history" onclick="window.showBView('history')">📜 <span id="tab-hist-lbl">History</span></button>
+    </div>
+  </div>
+
+  <!-- ITEMS VIEW -->
+  <div class="bview active" id="bview-items">
+    <div class="book-wrap">
+      <div class="book-section-title">🛒 <span id="lbl-select-items">Select Items &amp; Service</span></div>
+      <div class="service-filter">
+        <button class="filter-btn active" onclick="window.filterSvc('all',this)" id="flt-all">All</button>
+        <button class="filter-btn" onclick="window.filterSvc('iron',this)" id="flt-iron">🧺 Ironing</button>
+        <button class="filter-btn" onclick="window.filterSvc('dry',this)" id="flt-dry">✨ Dry Clean</button>
+      </div>
+      <div class="items-grid" id="items-grid"></div>
+    </div>
+  </div>
+
+  <!-- SCHEDULE VIEW -->
+  <div class="bview" id="bview-schedule">
+    <div class="book-wrap">
+      <div class="book-section-title">📋 <span id="lbl-order-summary">Order Summary</span></div>
+      <div class="order-summary-box" id="order-summary-box"><div class="empty-cart"><div class="ec-icon">🛒</div><p id="lbl-no-items">No items selected. Go back and add items.</p></div></div>
+      <div class="book-section-title">📍 <span id="lbl-pickup-details">Pickup Details</span></div>
+      <div class="form-card">
+        <div class="form-row-2">
+          <div class="fg"><label id="lbl-name">Your Name</label><input type="text" id="f-name" placeholder="e.g. Ramesh Patil"/></div>
+          <div class="fg"><label id="lbl-phone">Phone Number</label><input type="tel" id="f-phone" placeholder="e.g. 9876543210"/></div>
+        </div>
+        <div class="fg">
+          <label id="lbl-addr">Pickup Address</label>
+          <textarea id="f-address" placeholder="House / Flat No., Street, Area..."></textarea>
+          <button class="loc-btn" onclick="window.useMyLocation()">📍 <span id="lbl-use-loc">Use My Current Location</span></button>
+        </div>
+        <div class="form-row-2">
+          <div class="fg"><label id="lbl-date">Pickup Date</label><input type="date" id="f-date"/></div>
+          <div class="fg"><label id="lbl-time">Time Slot</label>
+            <select id="f-time">
+              <option value="" id="opt-select">Select slot</option>
+              <option id="opt-morning">Morning (8 AM – 11 AM)</option>
+              <option id="opt-afternoon">Afternoon (12 PM – 3 PM)</option>
+              <option id="opt-evening">Evening (4 PM – 7 PM)</option>
+            </select>
+          </div>
+        </div>
+        <button class="schedule-btn" onclick="window.generateTicket()">🎫 <span id="lbl-schedule-btn">Schedule Pickup &amp; Get Ticket</span></button>
+        <p class="disclaimer" id="lbl-disclaimer">⚠️ Final pricing subject to physical inspection of garments.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY VIEW -->
+  <div class="bview" id="bview-history">
+    <div class="book-wrap history-wrap">
+      <div class="book-section-title">📜 <span id="lbl-history-title">Order History</span></div>
+      <div id="history-list"></div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="bar-info">
+      <div class="bar-count" id="bar-count">0 items selected</div>
+      <div class="bar-total">Total: <span id="bar-total">₹0</span></div>
+    </div>
+    <button class="proceed-btn" id="proceed-btn" onclick="window.showBView('schedule')" disabled>
+      <span id="lbl-proceed">Proceed →</span>
+    </button>
+  </div>
+</div>
+
+<!-- TICKET MODAL -->
+<div class="modal-overlay" id="ticket-modal">
+  <div class="ticket" id="ticket-print">
+    <div class="ticket-hdr">
+      <div class="ticket-logo">Dnyaneshwari Dryers &amp; Dry Cleaners</div>
+      <div class="ticket-sub">Pickup Confirmation Ticket</div>
+      <div class="t-order-id" id="ticket-order-id">ORDER #DDC-000000</div>
+    </div>
+    <div class="ticket-body">
+      <div class="t-sec-label" id="lbl-t-customer">Customer Details</div>
+      <div class="ticket-meta" id="ticket-customer"></div>
+      <div class="t-sec-label" id="lbl-t-items">Items Ordered</div>
+      <div id="ticket-items"></div>
+      <div class="t-total-row"><div class="tt-lbl" id="lbl-t-total">Estimated Total</div><div class="tt-amt" id="ticket-total"></div></div>
+      <p style="font-size:.67rem;color:var(--text2);margin-top:10px;text-align:center"><span id="lbl-t-gen">Generated:</span> <span id="ticket-time"></span></p>
+    </div>
+    <div class="ticket-disclaimer" id="lbl-t-disclaimer">⚠️ Final pricing subject to physical inspection of garments.</div>
+    <div class="ticket-actions">
+      <button class="t-btn t-btn-close" onclick="window.closeTicket()" id="lbl-t-close">Close</button>
+      <button class="t-btn t-btn-dl" onclick="window.downloadTicket()" id="lbl-t-dl">⬇️ Download</button>
+      <button class="t-btn t-btn-new" onclick="window.newOrder()" id="lbl-t-new">🔄 New Order</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+/* ════════════ LANGUAGE DATA ════════════ */
+var currentLang = 'en';
+var bookLang = 'en';
+
+var T = {
+  en:{
+    'hero-name':'Dnyaneshwari','hero-dryers':'Dryers','hero-drycleaners':'Dry Cleaners',
+    'tagline':'Fresh · Clean · Delivered with Care',
+    'about-label':'Who We Are','about-title':'About Us',
+    'about-text':'Welcome to Dnyaneshwari Dryers & Dry Cleaners. We are a trusted local dry cleaning and laundry service based in Pune, dedicated to giving your clothes the care they deserve.',
+    'loc-title':'Our Location','loc-text':'Shop No. 1, Road,<br>Raghav Nagar,<br>Ambegaon Budruk,<br>Pune, Maharashtra — 411046',
+    'maps-hint':'Open in Google Maps →','why-title':'Why Choose Us',
+    'why-text':'Careful handling of all fabric types, reliable turnaround time, and honest service.',
+    'promise-title':'Our Promise','promise-text':'We treat every garment as if it were our own.',
+    'email-title':'Email Us','email-hint':'Send us an email →',
+    'price-label':'Our Prices','price-title':'Price List','iron-heading':'Ironing (Press)',
+    'ir-shirt':'Shirt','ir-pant':'Pant','ir-saree':'Saree','ir-urgent':'Urgent','ir-starch':'Starch (Special)',
+    'dry-heading':'Dry Cleaning','dc-shirt':'Shirt','dc-pant':'Pant','dc-white':'White Clothes',
+    'dc-saree':'Saree','dc-starch':'Starch (Special)','dc-saree-price':'From ₹100',
+    'per1':'/ piece','per2':'/ piece','per3':'/ piece','per4':'/ piece','per5':'/ piece',
+    'per6':'/ piece','per7':'/ piece','per8':'/ piece','per9':'/ piece',
+    'price-note':'📝 Note: We are not responsible for stains caused by turmeric (हळद) or colour (गुलाल) on clothes.',
+    'banner-title':'Ready to Place an Order?',
+    'banner-sub':'Select your items, schedule a pickup time, and get a digital ticket.',
+    'banner-btn-label':'Place Order Now','hero-order-label':'Place Order','nav-order-label':'Place Order'
+  },
+  mr:{
+    'hero-name':'ज्ञानेश्वरी','hero-dryers':'ड्रायर्स','hero-drycleaners':'ड्राय क्लीनर्स',
+    'tagline':'स्वच्छ · ताजे · काळजीपूर्वक सेवा',
+    'about-label':'आमच्याबद्दल','about-title':'आमची ओळख',
+    'about-text':'ज्ञानेश्वरी ड्रायर्स अँड ड्राय क्लीनर्समध्ये आपले स्वागत आहे. आम्ही पुण्यातील एक विश्वासू स्थानिक ड्राय क्लीनिंग आणि लॉन्ड्री सेवा आहोत.',
+    'loc-title':'आमचे ठिकाण','loc-text':'दुकान क्र. १, रस्ता,<br>राघव नगर,<br>आंबेगाव बुद्रुक,<br>पुणे, महाराष्ट्र — ४११०४६',
+    'maps-hint':'Google Maps वर उघडा →','why-title':'आम्हालाच का निवडा',
+    'why-text':'सर्व प्रकारच्या कापडांची काळजीपूर्वक हाताळणी, वेळेवर सेवा आणि विश्वासू काम.',
+    'promise-title':'आमचे वचन','promise-text':'आम्ही प्रत्येक कपडा आमचा स्वतःचा असल्यासारखे हाताळतो.',
+    'email-title':'ईमेल करा','email-hint':'आम्हाला ईमेल पाठवा →',
+    'price-label':'आमचे दर','price-title':'दर पत्रक','iron-heading':'प्रेस चे कपडे',
+    'ir-shirt':'शर्ट','ir-pant':'पॅन्ट','ir-saree':'साडी','ir-urgent':'अर्जंट','ir-starch':'स्टार्च (स्पेशल)',
+    'dry-heading':'ड्रायक्लीन','dc-shirt':'शर्ट','dc-pant':'पॅन्ट','dc-white':'पांढरे कपडे',
+    'dc-saree':'साडी','dc-starch':'स्टार्च (स्पेशल)','dc-saree-price':'₹१०० पासून पुढे',
+    'per1':'/ नग','per2':'/ नग','per3':'/ नग','per4':'/ नग','per5':'/ नग',
+    'per6':'/ नग','per7':'/ नग','per8':'/ नग','per9':'/ नग',
+    'price-note':'📝 टीप: डाग, हळदी व गुलालाचे कपड्याची गॅरंटी नाही.',
+    'banner-title':'ऑर्डर द्यायची आहे?',
+    'banner-sub':'आयटम निवडा, पिकअप वेळ ठरवा आणि डिजिटल तिकीट मिळवा.',
+    'banner-btn-label':'आता ऑर्डर द्या','hero-order-label':'ऑर्डर द्या','nav-order-label':'ऑर्डर द्या'
+  }
+};
+
+var BT = {
+  en:{
+    badge:'✦ Pickup Service', title:'Schedule a Pickup', sub:'Select items · Schedule · Get your ticket',
+    back:'Back', tabItems:'Items', tabSched:'Schedule', tabHist:'History',
+    selectItems:'Select Items & Service', all:'All', ironing:'🧺 Ironing', dryclean:'✨ Dry Clean',
+    orderSummary:'Order Summary', noItems:'No items selected. Go back and add items.',
+    pickupDetails:'Pickup Details', name:'Your Name', phone:'Phone Number',
+    addr:'Pickup Address', useLoc:'Use My Current Location', date:'Pickup Date',
+    time:'Time Slot', optSelect:'Select slot', optMorn:'Morning (8 AM – 11 AM)',
+    optAfter:'Afternoon (12 PM – 3 PM)', optEven:'Evening (4 PM – 7 PM)',
+    schedBtn:'Schedule Pickup & Get Ticket', disclaimer:'⚠️ Final pricing subject to physical inspection of garments.',
+    histTitle:'Order History', histEmpty:'No orders yet. Place your first order!',
+    proceed:'Proceed →', itemsSel:'items selected', itemSel:'item selected',
+    ironLbl:'Iron', dryLbl:'Dry', yourSel:'Your Selection', estTotal:'Estimated Total',
+    tCustomer:'Customer Details', tItems:'Items Ordered', tTotal:'Estimated Total',
+    tGen:'Generated:', tClose:'Close', tDl:'⬇️ Download', tNew:'🔄 New Order',
+    tDisc:'⚠️ Final pricing subject to physical inspection of garments.',
+    viewTicket:'View Ticket', delete:'Delete', clearAll:'🗑️ Clear All History',
+    name_lbl:'Name:', phone_lbl:'Phone:', addr_lbl:'Address:', pickup_lbl:'Pickup:',
+    iron_svc:'Iron', dry_svc:'Dry'
+  },
+  mr:{
+    badge:'✦ पिकअप सेवा', title:'पिकअप शेड्यूल करा', sub:'आयटम निवडा · शेड्यूल करा · तिकीट मिळवा',
+    back:'मागे', tabItems:'आयटम', tabSched:'शेड्यूल', tabHist:'इतिहास',
+    selectItems:'आयटम आणि सेवा निवडा', all:'सर्व', ironing:'🧺 इस्त्री', dryclean:'✨ ड्राय क्लीन',
+    orderSummary:'ऑर्डर सारांश', noItems:'कोणतेही आयटम निवडलेले नाहीत. मागे जा आणि आयटम जोडा.',
+    pickupDetails:'पिकअप तपशील', name:'तुमचे नाव', phone:'फोन नंबर',
+    addr:'पिकअप पत्ता', useLoc:'माझे सध्याचे स्थान वापरा', date:'पिकअप तारीख',
+    time:'वेळ स्लॉट', optSelect:'स्लॉट निवडा', optMorn:'सकाळ (8 ते 11)',
+    optAfter:'दुपार (12 ते 3)', optEven:'संध्याकाळ (4 ते 7)',
+    schedBtn:'पिकअप शेड्यूल करा व तिकीट मिळवा', disclaimer:'⚠️ अंतिम किंमत कपड्यांच्या प्रत्यक्ष तपासणीवर अवलंबून आहे.',
+    histTitle:'ऑर्डर इतिहास', histEmpty:'अजून कोणतीही ऑर्डर नाही. आपली पहिली ऑर्डर द्या!',
+    proceed:'पुढे जा →', itemsSel:'आयटम निवडले', itemSel:'आयटम निवडला',
+    ironLbl:'इस्त्री', dryLbl:'ड्राय', yourSel:'तुमची निवड', estTotal:'अंदाजे एकूण',
+    tCustomer:'ग्राहक तपशील', tItems:'मागवलेले आयटम', tTotal:'अंदाजे एकूण',
+    tGen:'तयार केले:', tClose:'बंद करा', tDl:'⬇️ डाउनलोड', tNew:'🔄 नवी ऑर्डर',
+    tDisc:'⚠️ अंतिम किंमत कपड्यांच्या प्रत्यक्ष तपासणीवर अवलंबून आहे.',
+    viewTicket:'तिकीट पहा', delete:'हटवा', clearAll:'🗑️ सर्व इतिहास साफ करा',
+    name_lbl:'नाव:', phone_lbl:'फोन:', addr_lbl:'पत्ता:', pickup_lbl:'पिकअप:',
+    iron_svc:'इस्त्री', dry_svc:'ड्राय'
+  }
+};
+
+/* ════════════ MAIN SITE ════════════ */
+var NL = {en:{home:'Home',about:'About',pricing:'Pricing'},mr:{home:'मुख्यपृष्ठ',about:'आमच्याबद्दल',pricing:'दर'}};
+
+window.toggleMenu = function(){document.getElementById('nav-menu').classList.toggle('open');document.getElementById('hamburger').classList.toggle('open');};
+window.navTo = function(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});document.getElementById('nav-menu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');};
+window.addEventListener('scroll',function(){var c='home';['home','about','pricing'].forEach(function(id){var el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-80)c=id;});['home','about','pricing'].forEach(function(id){var b=document.getElementById('nav-'+id);if(b)b.classList.toggle('nav-active',id===c);});});
+
+window.setLang = function(lang){
+  currentLang=lang;
+  var t=T[lang];
+  for(var id in t){var el=document.getElementById(id);if(el)el.innerHTML=t[id];}
+  var nl=NL[lang];
+  document.getElementById('nav-home-label').textContent=nl.home;
+  document.getElementById('nav-about-label').textContent=nl.about;
+  document.getElementById('nav-pricing-label').textContent=nl.pricing;
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
+  document.getElementById('btn-mr').classList.toggle('active',lang==='mr');
+  document.documentElement.lang=lang==='mr'?'mr':'en';
+};
+
+/* ════════════ BOOKING LANGUAGE ════════════ */
+window.setBookLang = function(lang){
+  bookLang=lang;
+  var b=BT[lang];
+  document.getElementById('blb-en').classList.toggle('active',lang==='en');
+  document.getElementById('blb-mr').classList.toggle('active',lang==='mr');
+  document.getElementById('bk-badge').textContent=b.badge;
+  document.getElementById('bk-title').textContent=b.title;
+  document.getElementById('bk-sub').textContent=b.sub;
+  document.getElementById('bk-back').textContent=b.back;
+  document.getElementById('tab-items-lbl').textContent=b.tabItems;
+  document.getElementById('tab-sched-lbl').textContent=b.tabSched;
+  document.getElementById('tab-hist-lbl').textContent=b.tabHist;
+  document.getElementById('lbl-select-items').textContent=b.selectItems;
+  document.getElementById('flt-all').textContent=b.all;
+  document.getElementById('flt-iron').textContent=b.ironing;
+  document.getElementById('flt-dry').textContent=b.dryclean;
+  document.getElementById('lbl-order-summary').textContent=b.orderSummary;
+  document.getElementById('lbl-no-items').textContent=b.noItems;
+  document.getElementById('lbl-pickup-details').textContent=b.pickupDetails;
+  document.getElementById('lbl-name').textContent=b.name;
+  document.getElementById('lbl-phone').textContent=b.phone;
+  document.getElementById('lbl-addr').textContent=b.addr;
+  document.getElementById('lbl-use-loc').textContent=b.useLoc;
+  document.getElementById('lbl-date').textContent=b.date;
+  document.getElementById('lbl-time').textContent=b.time;
+  document.getElementById('opt-select').textContent=b.optSelect;
+  document.getElementById('opt-morning').textContent=b.optMorn;
+  document.getElementById('opt-afternoon').textContent=b.optAfter;
+  document.getElementById('opt-evening').textContent=b.optEven;
+  document.getElementById('lbl-schedule-btn').textContent=b.schedBtn;
+  document.getElementById('lbl-disclaimer').textContent=b.disclaimer;
+  document.getElementById('lbl-history-title').textContent=b.histTitle;
+  document.getElementById('lbl-proceed').textContent=b.proceed;
+  document.getElementById('lbl-t-customer').textContent=b.tCustomer;
+  document.getElementById('lbl-t-items').textContent=b.tItems;
+  document.getElementById('lbl-t-total').textContent=b.tTotal;
+  document.getElementById('lbl-t-gen').textContent=b.tGen;
+  document.getElementById('lbl-t-close').textContent=b.tClose;
+  document.getElementById('lbl-t-dl').textContent=b.tDl;
+  document.getElementById('lbl-t-new').textContent=b.tNew;
+  document.getElementById('lbl-t-disclaimer').textContent=b.tDisc;
+  renderGrid();
+  updateBar();
+  renderHistory();
+};
+
+/* ════════════ PAGE SWITCH ════════════ */
+window.openBooking = function(){document.getElementById('page-main').classList.remove('active');document.getElementById('page-booking').classList.add('active');window.scrollTo(0,0);};
+window.closeBooking = function(){document.getElementById('page-booking').classList.remove('active');document.getElementById('page-main').classList.add('active');window.scrollTo(0,0);};
+
+/* ════════════ ITEMS + CART ════════════ */
+var ITEMS=[
+  {id:'i-shirt',  nameEn:'Shirt',         nameMr:'शर्ट',           icon:'👔',iron:10,  dry:10},
+  {id:'i-pant',   nameEn:'Pant',          nameMr:'पॅन्ट',          icon:'👖',iron:10,  dry:10},
+  {id:'i-saree',  nameEn:'Saree',         nameMr:'साडी',           icon:'🥻',iron:35,  dry:150},
+  {id:'i-kurta',  nameEn:'Kurta',         nameMr:'कुर्ता',         icon:'👘',iron:10,  dry:10},
+  {id:'i-suit',   nameEn:'Suit',          nameMr:'सूट',            icon:'🤵',iron:50,  dry:150},
+  {id:'i-jacket', nameEn:'Jacket',        nameMr:'जॅकेट',          icon:'🧥',iron:50,  dry:150},
+  {id:'i-blanket',nameEn:'Blanket',       nameMr:'ब्लँकेट',        icon:'🛏️',iron:null, dry:150},
+  {id:'i-white',  nameEn:'White Clothes', nameMr:'पांढरे कपडे',   icon:'🩱',iron:null, dry:40},
+  {id:'i-urgent', nameEn:'Urgent',        nameMr:'अर्जंट',         icon:'⚡',iron:15,  dry:null},
+  {id:'i-starch', nameEn:'Starch Special',nameMr:'स्टार्च स्पेशल',icon:'✨',iron:15,  dry:50},
+];
+var cart={};
+var activeFlt='all';
+
+function renderGrid(){
+  var g=document.getElementById('items-grid');
+  g.innerHTML='';
+  var b=BT[bookLang];
+  ITEMS.forEach(function(item){
+    if(activeFlt==='iron'&&!item.iron)return;
+    if(activeFlt==='dry'&&!item.dry)return;
+    var iq=(cart[item.id]&&cart[item.id].iq)||0;
+    var dq=(cart[item.id]&&cart[item.id].dq)||0;
+    var hasQty=iq>0||dq>0;
+    var nm=bookLang==='mr'?item.nameMr:item.nameEn;
+    var priceHtml='';
+    if(item.iron)priceHtml+='<span class="price-tag iron">₹'+item.iron+' '+b.ironLbl+'</span>';
+    if(item.dry)priceHtml+='<span class="price-tag dry">₹'+item.dry+'+ '+b.dryLbl+'</span>';
+    var ironRow=item.iron?'<div class="service-row"><span class="svc-label">'+b.ironLbl+'</span><div class="qty-ctrl"><button class="qb minus" onclick="window.chQty(\''+item.id+'\',\'iq\',-1)">−</button><span class="qty-val">'+iq+'</span><button class="qb plus" onclick="window.chQty(\''+item.id+'\',\'iq\',1)">+</button></div></div>':'';
+    var dryRow=item.dry?'<div class="service-row"><span class="svc-label">'+b.dryLbl+'</span><div class="qty-ctrl"><button class="qb minus" onclick="window.chQty(\''+item.id+'\',\'dq\',-1)">−</button><span class="qty-val">'+dq+'</span><button class="qb plus" onclick="window.chQty(\''+item.id+'\',\'dq\',1)">+</button></div></div>':'';
+    var card=document.createElement('div');
+    card.className='item-card'+(hasQty?' has-qty':'');
+    card.id='card-'+item.id;
+    card.innerHTML='<div class="qty-badge">'+(iq+dq)+'</div><div class="item-icon">'+item.icon+'</div><div class="item-name">'+nm+'</div><div class="item-prices">'+priceHtml+'</div><div class="service-rows">'+ironRow+dryRow+'</div>';
+    g.appendChild(card);
+  });
+}
+
+window.chQty=function(id,key,delta){
+  if(!cart[id])cart[id]={iq:0,dq:0};
+  cart[id][key]=Math.max(0,cart[id][key]+delta);
+  if(cart[id].iq===0&&cart[id].dq===0)delete cart[id];
+  renderGrid();updateBar();
+};
+
+function updateBar(){
+  var qty=0,price=0;
+  ITEMS.forEach(function(item){if(!cart[item.id])return;var iq=cart[item.id].iq||0,dq=cart[item.id].dq||0;qty+=iq+dq;if(item.iron)price+=iq*item.iron;if(item.dry)price+=dq*item.dry;});
+  var b=BT[bookLang];
+  document.getElementById('bar-count').textContent=qty+' '+(qty===1?b.itemSel:b.itemsSel);
+  document.getElementById('bar-total').textContent='₹'+price;
+  document.getElementById('proceed-btn').disabled=qty===0;
+}
+
+window.filterSvc=function(type,el){activeFlt=type;document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});el.classList.add('active');renderGrid();};
+
+window.showBView=function(name){
+  document.querySelectorAll('.bview').forEach(function(v){v.classList.remove('active')});
+  document.getElementById('bview-'+name).classList.add('active');
+  ['items','schedule','history'].forEach(function(n){document.getElementById('btab-'+n).classList.toggle('active',n===name);});
+  if(name==='schedule')renderSummary();
+  if(name==='history')renderHistory();
+};
+
+function renderSummary(){
+  var box=document.getElementById('order-summary-box');
+  var b=BT[bookLang];
+  var rows='',total=0,has=false;
+  ITEMS.forEach(function(item){
+    if(!cart[item.id])return;
+    var iq=cart[item.id].iq||0,dq=cart[item.id].dq||0;
+    var nm=bookLang==='mr'?item.nameMr:item.nameEn;
+    if(iq>0&&item.iron){has=true;var s=iq*item.iron;total+=s;rows+='<div class="sum-row"><span class="sum-name">'+item.icon+' '+nm+' ×'+iq+' ('+b.ironLbl+')</span><span class="sum-price">₹'+s+'</span></div>';}
+    if(dq>0&&item.dry){has=true;var s2=dq*item.dry;total+=s2;rows+='<div class="sum-row"><span class="sum-name">'+item.icon+' '+nm+' ×'+dq+' ('+b.dryLbl+')</span><span class="sum-price">₹'+s2+'</span></div>';}
+  });
+  box.innerHTML=has?'<h4>'+b.yourSel+'</h4>'+rows+'<div class="sum-total"><span class="sum-name">'+b.estTotal+'</span><span class="sum-price">₹'+total+'</span></div>':'<div class="empty-cart"><div class="ec-icon">🛒</div><p>'+b.noItems+'</p></div>';
+}
+
+/* ════════════ ORDER HISTORY ════════════ */
+var orderHistory=JSON.parse(localStorage.getItem('ddc_history')||'[]');
+
+function saveHistory(){localStorage.setItem('ddc_history',JSON.stringify(orderHistory));}
+
+function renderHistory(){
+  var b=BT[bookLang];
+  var list=document.getElementById('history-list');
+  if(!orderHistory.length){list.innerHTML='<div class="history-empty"><div class="he-icon">📭</div><p>'+b.histEmpty+'</p></div>';return;}
+  var html='';
+  orderHistory.slice().reverse().forEach(function(o,ri){
+    var i=orderHistory.length-1-ri;
+    html+='<div class="history-card">';
+    html+='<div class="hc-top"><span class="hc-order-id">'+o.orderId+'</span><span class="hc-date">'+o.dateTime+'</span></div>';
+    html+='<div class="hc-customer">👤 '+o.name+' · 📞 '+o.phone+'</div>';
+    html+='<div class="hc-items">'+o.itemsText+'</div>';
+    html+='<div class="hc-bottom"><div class="hc-total">'+b.estTotal+': <span>₹'+o.total+'</span></div>';
+    html+='<div class="hc-actions"><button class="hc-view-btn" onclick="window.viewHistoryTicket('+i+')">'+b.viewTicket+'</button>';
+    html+='<button class="hc-del-btn" onclick="window.deleteOrder('+i+')">'+b.delete+'</button></div></div>';
+    html+='</div>';
+  });
+  html+='<button class="history-clear-btn" onclick="window.clearHistory()">'+b.clearAll+'</button>';
+  list.innerHTML=html;
+}
+
+window.deleteOrder=function(i){orderHistory.splice(i,1);saveHistory();renderHistory();};
+window.clearHistory=function(){if(confirm('Clear all order history?')){orderHistory=[];saveHistory();renderHistory();}};
+
+window.viewHistoryTicket=function(i){
+  var o=orderHistory[i];
+  var b=BT[bookLang];
+  document.getElementById('ticket-order-id').textContent=o.orderId;
+  document.getElementById('ticket-customer').innerHTML=b.name_lbl+' '+o.name+'<br>'+b.phone_lbl+' '+o.phone+'<br>'+b.addr_lbl+' '+o.address+'<br>'+b.pickup_lbl+' '+o.pickupDate+' · '+o.pickupTime;
+  document.getElementById('ticket-items').innerHTML=o.itemsHtml;
+  document.getElementById('ticket-total').textContent='₹'+o.total;
+  document.getElementById('ticket-time').textContent=o.dateTime;
+  document.getElementById('ticket-modal').classList.add('show');
+};
+
+/* ════════════ GOOGLE SHEETS CONFIG ════════════ */
+// ⬇️ PASTE YOUR APPS SCRIPT WEB APP URL HERE:
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxbCj0ij6PgkJqAGR0lrY7dztwxKYRh0w29AmcshGzbcsGllJB9Ru3n8A6thLfHw7gq/exec';
+
+function sendToGoogleSheets(data) {
+  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') return;
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(data)
+  }).catch(function(e){ console.log('Sheet sync error:', e); });
+}
+
+/* ════════════ LOCATION ════════════ */
+window.useMyLocation=function(){
+  if(!navigator.geolocation){alert('Geolocation not supported.');return;}
+  navigator.geolocation.getCurrentPosition(function(p){document.getElementById('f-address').value='Lat: '+p.coords.latitude.toFixed(5)+', Lng: '+p.coords.longitude.toFixed(5)+' (GPS)';},function(){alert('Could not get location. Please enter manually.');});
+};
+
+/* ════════════ TICKET GENERATE ════════════ */
+var currentOrderData=null;
+window.generateTicket=function(){
+  var name=document.getElementById('f-name').value.trim();
+  var phone=document.getElementById('f-phone').value.trim();
+  var addr=document.getElementById('f-address').value.trim();
+  var date=document.getElementById('f-date').value;
+  var time=document.getElementById('f-time').value;
+  var b=BT[bookLang];
+  if(!name){alert(b.name+' ?');return;}
+  if(!phone){alert(b.phone+' ?');return;}
+  if(!addr){alert(b.addr+' ?');return;}
+  if(!date){alert(b.date+' ?');return;}
+  if(!time){alert(b.time+' ?');return;}
+  if(!Object.keys(cart).length){alert(b.noItems);return;}
+
+  var orderId='DDC-'+Date.now().toString().slice(-6);
+  var total=0,itemsHtml='',itemsText='';
+  ITEMS.forEach(function(item){
+    if(!cart[item.id])return;
+    var iq=cart[item.id].iq||0,dq=cart[item.id].dq||0;
+    var nm=bookLang==='mr'?item.nameMr:item.nameEn;
+    if(iq>0&&item.iron){var s=iq*item.iron;total+=s;itemsHtml+='<div class="t-item-row"><span>'+item.icon+' '+nm+' ×'+iq+' ('+b.iron_svc+')</span><span style="font-weight:600">₹'+s+'</span></div>';itemsText+=item.icon+' '+nm+' ×'+iq+' ('+b.iron_svc+') — ₹'+s+', ';}
+    if(dq>0&&item.dry){var s2=dq*item.dry;total+=s2;itemsHtml+='<div class="t-item-row"><span>'+item.icon+' '+nm+' ×'+dq+' ('+b.dry_svc+')</span><span style="font-weight:600">₹'+s2+'</span></div>';itemsText+=item.icon+' '+nm+' ×'+dq+' ('+b.dry_svc+') — ₹'+s2+', ';}
+  });
+
+  var df=new Date(date).toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+  var now=new Date().toLocaleString('en-IN');
+
+  // Save to local history
+  currentOrderData={orderId:orderId,name:name,phone:phone,address:addr,pickupDate:df,pickupTime:time,itemsHtml:itemsHtml,itemsText:itemsText,total:total,dateTime:now};
+  orderHistory.push(currentOrderData);
+  saveHistory();
+
+  // ✅ Send to Google Sheets
+  sendToGoogleSheets({
+    orderId:orderId,
+    name:name,
+    phone:phone,
+    address:addr,
+    pickupDate:df,
+    pickupTime:time,
+    items:itemsText.replace(/,\s*$/,''),
+    total:'₹'+total,
+    dateTime:now
+  });
+
+  document.getElementById('ticket-order-id').textContent=orderId;
+  document.getElementById('ticket-customer').innerHTML=b.name_lbl+' '+name+'<br>'+b.phone_lbl+' '+phone+'<br>'+b.addr_lbl+' '+addr+'<br>'+b.pickup_lbl+' '+df+' · '+time;
+  document.getElementById('ticket-items').innerHTML=itemsHtml;
+  document.getElementById('ticket-total').textContent='₹'+total;
+  document.getElementById('ticket-time').textContent=now;
+  document.getElementById('ticket-modal').classList.add('show');
+};
+
+/* ════════════ DOWNLOAD TICKET — Blob URL method (no popup needed) ════════════ */
+window.downloadTicket=function(){
+  var b=BT[bookLang];
+  var orderId=document.getElementById('ticket-order-id').textContent;
+  var customer=document.getElementById('ticket-customer').innerHTML;
+  var items=document.getElementById('ticket-items').innerHTML;
+  var total=document.getElementById('ticket-total').textContent;
+  var time=document.getElementById('ticket-time').textContent;
+
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"/><title>Ticket '+orderId+'</title>'
+    +'<style>'
+    +'*{box-sizing:border-box;margin:0;padding:0}'
+    +'body{font-family:Arial,sans-serif;background:#f0f4f8;padding:20px;display:flex;justify-content:center}'
+    +'.ticket{background:#fff;border-radius:12px;width:100%;max-width:420px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.15)}'
+    +'.hdr{background:#0b2545;padding:20px;text-align:center;color:#fff}'
+    +'.logo{font-size:14px;font-weight:700;color:#00c9a7;margin-bottom:4px}'
+    +'.sub{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5)}'
+    +'.oid{display:inline-block;margin-top:10px;background:rgba(0,201,167,.2);border:1px solid rgba(0,201,167,.4);color:#00e5bf;font-size:12px;font-weight:700;padding:4px 16px;border-radius:20px;letter-spacing:2px}'
+    +'.body{padding:18px}'
+    +'.sec{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#4a6080;margin:14px 0 6px}'
+    +'.meta{font-size:12px;color:#4a6080;line-height:1.9}'
+    +'.meta span{font-weight:700;color:#0b2545}'
+    +'.irow{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #d8e4f0;font-size:12px}'
+    +'.irow:last-child{border:none}'
+    +'.total-box{display:flex;justify-content:space-between;align-items:center;background:#e0faf5;border-radius:8px;padding:12px 14px;margin-top:10px}'
+    +'.total-box .lbl{font-size:13px;font-weight:600;color:#0b2545}'
+    +'.total-box .amt{font-size:18px;font-weight:700;color:#0b2545}'
+    +'.gen{font-size:10px;color:#999;text-align:center;margin-top:10px}'
+    +'.disc{font-size:10px;color:#666;text-align:center;padding:10px 14px;background:#f8fafc;border-top:1px solid #e0e8f0;line-height:1.6}'
+    +'@media print{body{background:#fff;padding:0}.ticket{box-shadow:none;max-width:100%;border-radius:0}}'
+    +'</style></head><body>'
+    +'<div class="ticket">'
+    +'<div class="hdr"><div class="logo">Dnyaneshwari Dryers &amp; Dry Cleaners</div>'
+    +'<div class="sub">Pickup Confirmation Ticket</div>'
+    +'<div class="oid">'+orderId+'</div></div>'
+    +'<div class="body">'
+    +'<div class="sec">'+b.tCustomer+'</div>'
+    +'<div class="meta">'+customer+'</div>'
+    +'<div class="sec">'+b.tItems+'</div>'
+    +items
+    +'<div class="total-box"><div class="lbl">'+b.tTotal+'</div><div class="amt">'+total+'</div></div>'
+    +'<div class="gen">'+b.tGen+' '+time+'</div>'
+    +'</div>'
+    +'<div class="disc">'+b.tDisc+'</div>'
+    +'</div>'
+    +'</body></html>';
+
+  // Create blob and download as .html file (opens in browser → Save as PDF from share menu)
+  var blob=new Blob([html],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='Ticket-'+orderId+'.html';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
+};
+
+window.closeTicket=function(){document.getElementById('ticket-modal').classList.remove('show');};
+window.newOrder=function(){
+  cart={};
+  ['f-name','f-phone','f-address','f-date'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('f-time').value='';
+  window.closeTicket();
+  window.showBView('items');
+  renderGrid();
+  updateBar();
+};
+
+// ── Re-register ALL functions explicitly on window to survive Cloudflare scope wipe ──
+window.openBooking    = function(){ document.getElementById('page-main').classList.remove('active'); document.getElementById('page-booking').classList.add('active'); window.scrollTo(0,0); };
+window.closeBooking   = function(){ document.getElementById('page-booking').classList.remove('active'); document.getElementById('page-main').classList.add('active'); window.scrollTo(0,0); };
+window.toggleMenu     = window.toggleMenu;
+window.navTo          = window.navTo;
+window.setLang        = window.setLang;
+window.setBookLang    = window.setBookLang;
+window.chQty          = window.chQty;
+window.filterSvc      = window.filterSvc;
+window.showBView      = window.showBView;
+window.useMyLocation  = window.useMyLocation;
+window.generateTicket = window.generateTicket;
+window.downloadTicket = window.downloadTicket;
+window.deleteOrder    = window.deleteOrder;
+window.clearHistory   = window.clearHistory;
+window.viewHistoryTicket = window.viewHistoryTicket;
+window.closeTicket    = window.closeTicket;
+window.newOrder       = window.newOrder;
+
+// Init
+document.getElementById('f-date').min = new Date().toISOString().split('T')[0];
+renderGrid();
+updateBar();
+renderHistory();
+
+})(); // end IIFE
+</script>
+</body>
+</html>
